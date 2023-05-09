@@ -20,19 +20,19 @@ const initialState = {
 const postSlice = createSlice({
   name: 'posts',
   initialState,
-  reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1
+  reducers: {},
+  extraReducers: {
+    [fetchPosts.pending]: (state) => {
+      state.posts.items = []
+      state.posts.status = 'loading'
     },
-    decrement: (state) => {
-      state.value -= 1
+    [fetchPosts.fulfilled]: (state, action) => {
+      state.posts.items = action.payload
+      state.posts.status = 'loaded'
     },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
+    [fetchPosts.rejected]: (state, action) => {
+      state.posts.items = []
+      state.posts.status = 'error'
     },
   },
 })
