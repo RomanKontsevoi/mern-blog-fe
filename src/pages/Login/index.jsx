@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchAuth, selectIsAuth } from '../../redux/slices/auth'
 
 export const Login = () => {
+  const dispatch = useDispatch()
   const isAuth = useSelector(selectIsAuth)
   const {
     register,
@@ -26,8 +27,6 @@ export const Login = () => {
     },
     mode: 'onChange',
   })
-
-  const dispatch = useDispatch()
 
   const onSubmit = async (values) => {
     const data = await dispatch(fetchAuth(values))
@@ -59,10 +58,10 @@ export const Login = () => {
         <TextField
           className={styles.field}
           label="E-Mail"
+          type="email"
+          fullWidth
           error={!!errors.email?.message}
           helperText={errors.email?.message}
-          fullWidth
-          type="email"
           {...register('email', { required: 'Укажите почту' })}
         />
         <TextField
