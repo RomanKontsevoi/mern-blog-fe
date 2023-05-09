@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar'
 
 import styles from './Login.module.scss'
 import { useForm } from 'react-hook-form'
-import { fetchAuth, fetchRegister, selectIsAuth } from '../../redux/slices/auth'
+import { fetchRegister, selectIsAuth } from '../../redux/slices/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
@@ -90,6 +90,7 @@ export const Registration = () => {
           size="large"
           variant="contained"
           fullWidth
+          disabled={!isValid}
         >
           Зарегистрироваться
         </Button>
