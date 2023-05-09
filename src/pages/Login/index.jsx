@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchAuth, selectIsAuth } from '../../redux/slices/auth'
 
 export const Login = () => {
-  const isAuthorized = useSelector(selectIsAuth)
+  const isAuth = useSelector(selectIsAuth)
   const {
     register,
     handleSubmit,
@@ -33,7 +33,7 @@ export const Login = () => {
     dispatch(fetchAuth(values))
   }
 
-  if (isAuthorized) {
+  if (isAuth) {
     return <Navigate to="/" />
   }
 
