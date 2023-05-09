@@ -75,9 +75,6 @@ const postSlice = createSlice({
   },
 })
 
-// Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = postSlice.actions
-
 const postsReducer = postSlice.reducer
 
 export default postsReducer
