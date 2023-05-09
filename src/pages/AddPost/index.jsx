@@ -1,24 +1,27 @@
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import SimpleMDE from 'react-simplemde-editor';
+import React from 'react'
+import TextField from '@mui/material/TextField'
+import Paper from '@mui/material/Paper'
+import Button from '@mui/material/Button'
+import SimpleMDE from 'react-simplemde-editor'
 import { Link } from 'react-router-dom'
 
-import 'easymde/dist/easymde.min.css';
-import styles from './AddPost.module.scss';
+import 'easymde/dist/easymde.min.css'
+import styles from './AddPost.module.scss'
+import { baseURL } from '../../axios'
 
 export const AddPost = () => {
-  const imageUrl = '';
-  const [value, setValue] = React.useState('');
+  const imageUrl = ''
+  const [ value, setValue ] = React.useState('')
 
-  const handleChangeFile = () => {};
+  const handleChangeFile = () => {
+  }
 
-  const onClickRemoveImage = () => {};
+  const onClickRemoveImage = () => {
+  }
 
   const onChange = React.useCallback((value) => {
-    setValue(value);
-  }, []);
+    setValue(value)
+  }, [])
 
   const options = React.useMemo(
     () => ({
@@ -33,21 +36,36 @@ export const AddPost = () => {
       },
     }),
     [],
-  );
+  )
 
   return (
     <Paper style={{ padding: 30 }}>
-      <Button variant="outlined" size="large">
+      <Button
+        variant="outlined"
+        size="large"
+      >
         Загрузить превью
       </Button>
-      <input type="file" onChange={handleChangeFile} hidden />
+      <input
+        type="file"
+        onChange={handleChangeFile}
+        hidden
+      />
       {imageUrl && (
-        <Button variant="contained" color="error" onClick={onClickRemoveImage}>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={onClickRemoveImage}
+        >
           Удалить
         </Button>
       )}
       {imageUrl && (
-        <img className={styles.image} src={`http://localhost:4444${imageUrl}`} alt="Uploaded" />
+        <img
+          className={styles.image}
+          src={`${baseURL}${imageUrl}`}
+          alt="Uploaded"
+        />
       )}
       <br />
       <br />
@@ -57,10 +75,23 @@ export const AddPost = () => {
         placeholder="Заголовок статьи..."
         fullWidth
       />
-      <TextField classes={{ root: styles.tags }} variant="standard" placeholder="Тэги" fullWidth />
-      <SimpleMDE className={styles.editor} value={value} onChange={onChange} options={options} />
+      <TextField
+        classes={{ root: styles.tags }}
+        variant="standard"
+        placeholder="Тэги"
+        fullWidth
+      />
+      <SimpleMDE
+        className={styles.editor}
+        value={value}
+        onChange={onChange}
+        options={options}
+      />
       <div className={styles.buttons}>
-        <Button size="large" variant="contained">
+        <Button
+          size="large"
+          variant="contained"
+        >
           Опубликовать
         </Button>
         <Link to="/">
@@ -68,5 +99,5 @@ export const AddPost = () => {
         </Link>
       </div>
     </Paper>
-  );
-};
+  )
+}
