@@ -26,7 +26,11 @@ const router = createBrowserRouter([
     element: layout(FullPost),
   },
   {
-    path: '/add-post',
+    path: '/posts/:id/edit',
+    element: layout(AddPost),
+  },
+  {
+    path: '/posts/create',
     element: layout(AddPost),
   },
   {
