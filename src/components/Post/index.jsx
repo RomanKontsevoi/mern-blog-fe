@@ -1,16 +1,18 @@
-import React from 'react';
-import clsx from 'clsx';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Clear';
-import EditIcon from '@mui/icons-material/Edit';
-import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined';
-import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
+import React from 'react'
+import clsx from 'clsx'
+import IconButton from '@mui/material/IconButton'
+import DeleteIcon from '@mui/icons-material/Clear'
+import EditIcon from '@mui/icons-material/Edit'
+import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined'
+import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined'
 
-import styles from './Post.module.scss';
-import { UserInfo } from '../UserInfo';
-import { PostSkeleton } from './Skeleton';
+import styles from './Post.module.scss'
+import { UserInfo } from '../UserInfo'
+import { PostSkeleton } from './Skeleton'
 import { Link } from 'react-router-dom'
-import { baseURL } from '../../axios'
+import axios, { baseURL } from '../../axios'
+import { fetchPosts } from '../../redux/slices/posts'
+import { useDispatch } from 'react-redux'
 
 export const Post = ({
   id,
@@ -26,11 +28,20 @@ export const Post = ({
   isLoading,
   isEditable,
 }) => {
+  const dispatch = useDispatch()
+
   if (isLoading) {
     return <PostSkeleton />;
   }
 
-  const onClickRemove = () => {};
+  const onClickRemove = async () => {
+    try {
+      await axios.delete(`/posts/${id}`)
+      dispatch(fetchPosts())
+    } catch (e) {
+      console.warn('Ошибка при удалении статьи')
+    }
+  };
 
   return (
     <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>

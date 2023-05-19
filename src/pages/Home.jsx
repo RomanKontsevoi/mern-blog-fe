@@ -58,7 +58,7 @@ export const Home = () => {
                   key={index}
                   id={obj._id}
                   title={obj.title}
-                  imageUrl={obj.imageUrl}
+                  imageUrl={obj.imageUrl ? obj.imageUrl : ''}
                   user={obj.user}
                   createdAt={obj.createdAt}
                   viewsCount={obj.viewsCount}
