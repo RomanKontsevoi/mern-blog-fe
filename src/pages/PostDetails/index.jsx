@@ -74,6 +74,7 @@ export const AddPost = () => {
         enabled: true,
         delay: 1000,
       },
+      showIcons: ["code", "table"],
     }),
     [],
   )
@@ -83,7 +84,7 @@ export const AddPost = () => {
       setLoading(true)
       const tagsArray = tags
         .split(',')
-        .map(tag => tag.trim())
+        .map(tag => tag.trim()) || null
       const fields = { title, tags: tagsArray, text, imageUrl }
       const { data } = id ?
         await axios.patch(`/posts/${id}`, fields) :

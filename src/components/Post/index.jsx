@@ -9,9 +9,9 @@ import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined'
 import styles from './Post.module.scss'
 import { UserInfo } from '../UserInfo'
 import { PostSkeleton } from './Skeleton'
-import { Link } from 'react-router-dom'
-import axios, { baseURL } from '../../axios'
-import { fetchPosts } from '../../redux/slices/posts'
+import { Link, useNavigate } from 'react-router-dom'
+import { baseURL } from '../../axios'
+import { fetchRemovePost } from '../../redux/slices/posts'
 import { useDispatch } from 'react-redux'
 
 export const Post = ({
@@ -29,17 +29,22 @@ export const Post = ({
   isEditable,
 }) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   if (isLoading) {
     return <PostSkeleton />;
   }
 
   const onClickRemove = async () => {
-    try {
-      await axios.delete(`/posts/${id}`)
-      dispatch(fetchPosts())
-    } catch (e) {
-      console.warn('Ошибка при удалении статьи')
+    if (window.confirm("Вы действительно хотите удалить статью?")) {
+      try {
+        dispatch(fetchRemovePost(id))
+        if (isFullPost) {
+          navigate('/')
+        }
+      } catch (e) {
+        console.warn('Ошибка при удалении статьи')
+      }
     }
   };
 
@@ -71,7 +76,7 @@ export const Post = ({
             {isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>}
           </h2>
           <ul className={styles.tags}>
-            {tags.map((name) => (
+            {tags?.map((name) => (
               <li key={name}>
                 <Link to={`/tag/${name}`}>#{name}</Link>
               </li>

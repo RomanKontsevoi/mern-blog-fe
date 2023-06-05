@@ -24,8 +24,6 @@ export const FullPost = () => {
     dispatch(fetchPost(id))
   }, [ dispatch, id ])
 
-  console.log(id)
-
   if (isPostLoading) {
     return <Post
       isLoading
