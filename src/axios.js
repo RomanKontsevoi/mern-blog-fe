@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-export const baseURL = 'http://localhost:4444'
+console.log(process)
+
+export const baseURL = process.env.BASE_SERVER_URL
 
 const instance = axios.create({
   baseURL: `${baseURL}/`,
