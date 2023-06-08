@@ -89,7 +89,7 @@ export const AddPost = () => {
       const { data } = id ?
         await axios.patch(`/posts/${id}`, fields) :
         await axios.post('/posts', fields)
-      navigate(`/posts/${data._id ?? id}`)
+      navigate(`/posts/${id ?? data._id}`)
     } catch (e) {
       console.warn('Ошибка при создании статьи')
     } finally {
