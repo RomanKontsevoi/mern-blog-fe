@@ -1,8 +1,6 @@
 import axios from 'axios'
 
-console.log(process)
-
-export const baseURL = process.env.BASE_SERVER_URL
+export const baseURL = process.env.REACT_APP_BASE_SERVER_URL
 
 const instance = axios.create({
   baseURL: `${baseURL}/`,
