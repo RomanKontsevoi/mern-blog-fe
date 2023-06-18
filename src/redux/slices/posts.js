@@ -17,7 +17,6 @@ export const fetchPost = createAsyncThunk('posts/fetchPost', async (id) => {
 })
 
 export const fetchRemovePost = createAsyncThunk('posts/fetchRemovePost', async (id) => {
-  console.log({ id })
   try {
     const { data } = await axios.delete(`/posts/${id}`)
     return data
@@ -83,16 +82,13 @@ const postSlice = createSlice({
       state.post.status = 'error'
     },
     [fetchRemovePost.pending]: (state, action) => {
-      console.log({ action, state })
       state.posts.items = state.posts.items.filter(item => item._id !== action.meta.arg)
     },
     [fetchRemovePost.fulfilled]: (state, action) => {
-      console.log('fulfilled')
       state.post.item = action.payload
       state.post.status = 'loaded'
     },
     [fetchRemovePost.rejected]: (state) => {
-      console.log('rejected')
       state.post.item = {}
       state.post.status = 'error'
     },
