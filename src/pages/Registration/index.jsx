@@ -80,6 +80,7 @@ export const Registration = () => {
           className={styles.field}
           label="Пароль"
           fullWidth
+          type='password'
           error={!!errors.password?.message}
           helperText={errors.password?.message}
           {...register('password', { required: 'Укажите пароль' })}
